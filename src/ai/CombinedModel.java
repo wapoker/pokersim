@@ -3,23 +3,22 @@ import java.util.ArrayList;
 
 
 public class CombinedModel {
-	public static final int FEATURE_AMOUNT = 1;
+	public static final int FEATURE_AMOUNT = 13;
 
-	private ArrayList<DataPoint> ingameData = new ArrayList<DataPoint>();
-	private ArrayList<DataPoint> pregameData = new ArrayList<DataPoint>();
+	private static ArrayList<DataPoint> ingameData = new ArrayList<DataPoint>();
+	private static ArrayList<DataPoint> pregameData = new ArrayList<DataPoint>();
 	private ArrayList<DataPoint> combinedData = new ArrayList<DataPoint>();
 
 	/**
-	 * extends ingameData by current game state
-	 * @param list of all features of current game state (also unknown features marked by special value as such)
+	 * extends ingameData by one element
+	 * @param DataPoint containing all information known at round end
 	 * */
-	public void addIngameData(String[] features) {
-		double[] feature_values = new double[FEATURE_AMOUNT];
-		feature_values[0] = (Double.parseDouble(features[7])-Double.parseDouble(features[5])) / Double.parseDouble(features[0]);
-		if(feature_values[0] < 0)
-			feature_values[0] = -1;
-		feature_values[0]++;
-		ingameData.add(new DataPoint(feature_values));
+	public static void addIngameData(DataPoint dp) {
+		ingameData.add(dp);
+	}
+	
+	public static void addPregameData(DataPoint dp) {
+		pregameData.add(dp);
 	}
 	
 	/**
@@ -63,8 +62,8 @@ public class CombinedModel {
 	 * @param pregame_datapoint datapoint which score will be determined
 	 * TODO find formula
 	 * */
-	public double getPregameDataPointScore(DataPoint pregame_datapoint) {
-		return 0;
+	public double getPregameDataPointScore(DataPoint dp) {
+		return Math.random();
 	}
 	
 	// GETTERS AND SETTERS

@@ -20,4 +20,12 @@ public class Action {
 
 enum ActionType {
 	raise, call, fold;
+	
+	public int toNumber() {
+		if(this == raise)
+			return 1;
+		if(this == call)
+			return 0;
+		return -1;
+	}
 }
